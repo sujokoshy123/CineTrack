@@ -22,7 +22,7 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build web --release --dart-define=TMDB_API_KEY=${{ secrets.TMDB_API_KEY }} --base-href /CineTrack/
+      - run: flutter build web --release --web-renderer html --dart-define=TMDB_API_KEY=${{ secrets.TMDB_API_KEY }} --base-href /CineTrack/
 
       - uses: peaceiris/actions-gh-pages@v4
         with:
