@@ -78,7 +78,15 @@ class _TrendingTab extends ConsumerWidget {
                 selected: isSelected,
                 onSelected: (_) => ref.read(languageFilterProvider.notifier).state = filter,
                 showCheckmark: false,
+                // Explicit colors override Material 3's default surface tinting,
+                // which was washing the chips out to near-white and making
+                // the white label text unreadable against it.
+                backgroundColor: AppColors.surface,
+                selectedColor: AppColors.crimson,
+                surfaceTintColor: Colors.transparent,
+                side: BorderSide(color: Colors.white.withOpacity(0.15)),
                 labelStyle: TextStyle(
+                  fontFamily: 'Poppins',
                   color: isSelected ? Colors.white : Colors.white70,
                   fontWeight: FontWeight.w600,
                 ),
