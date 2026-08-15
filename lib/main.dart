@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'screens/home_screen.dart';
 
@@ -26,7 +25,19 @@ class CineTrackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseTextTheme = GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme);
+    // Fonts are bundled locally (see pubspec.yaml / assets/fonts) instead of
+    // fetched over the network at runtime - this avoids the font-swap flash
+    // (blurry text) that happens with remotely-loaded web fonts.
+    const baseTextTheme = TextTheme(
+      bodyLarge: TextStyle(fontFamily: 'Poppins'),
+      bodyMedium: TextStyle(fontFamily: 'Poppins'),
+      bodySmall: TextStyle(fontFamily: 'Poppins'),
+      titleLarge: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+      titleMedium: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+      titleSmall: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+      headlineSmall: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700),
+      labelLarge: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+    );
 
     return MaterialApp(
       title: 'CineTrack',
@@ -42,13 +53,13 @@ class CineTrackApp extends StatelessWidget {
           surface: AppColors.surface,
         ),
         useMaterial3: true,
+        fontFamily: 'Poppins',
         textTheme: baseTextTheme,
-        // Bebas Neue gives headings that cinema-poster / marquee feel.
-        primaryTextTheme: baseTextTheme,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          titleTextStyle: GoogleFonts.bebasNeue(
+          titleTextStyle: TextStyle(
+            fontFamily: 'BebasNeue',
             fontSize: 32,
             letterSpacing: 1.5,
             color: Colors.white,
@@ -58,13 +69,13 @@ class CineTrackApp extends StatelessWidget {
           backgroundColor: AppColors.surface,
           indicatorColor: AppColors.crimson.withOpacity(0.25),
           labelTextStyle: WidgetStateProperty.all(
-            GoogleFonts.poppins(fontSize: 11, fontWeight: FontWeight.w600),
+            const TextStyle(fontFamily: 'Poppins', fontSize: 11, fontWeight: FontWeight.w600),
           ),
         ),
         chipTheme: ChipThemeData(
           backgroundColor: AppColors.surface,
           selectedColor: AppColors.crimson,
-          labelStyle: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
+          labelStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 13, fontWeight: FontWeight.w600),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
