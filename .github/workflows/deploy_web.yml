@@ -1,0 +1,30 @@
+name: Deploy Web Demo
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+
+      - run: flutter create . --platforms=web --project-name=cinetrack
+
+      - run: flutter pub get
+
+      - run: flutter build web --release --dart-define=TMDB_API_KEY=${{ secrets.TMDB_API_KEY }} --base-href /CineTrack/
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
