@@ -45,14 +45,17 @@ class CineTrackApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.background,
+        useMaterial3: true,
+        // Prevents Material 3 from auto-tinting surfaces (chips, cards, app bars)
+        // toward a lighter color - keeps the intended dark cinematic look consistent.
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.crimson,
           brightness: Brightness.dark,
           primary: AppColors.crimson,
           secondary: AppColors.gold,
           surface: AppColors.surface,
+          surfaceTint: Colors.transparent,
         ),
-        useMaterial3: true,
         fontFamily: 'Poppins',
         textTheme: baseTextTheme,
         appBarTheme: const AppBarTheme(
